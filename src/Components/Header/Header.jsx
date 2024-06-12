@@ -1,13 +1,49 @@
 import logo from "../../assets/amazon.png"
-import { useState } from "react";
+import { useContext, useState, } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaCartShopping } from "react-icons/fa6";
+import { SearchContext } from "../../Context/Data/SearchContext";
+import {useNavigate} from "react-router-dom"
 
-const Header = () =>{
+import axios from 'axios';
+
+const Header = ({}) =>{
    const[showAll, setShowAll] = useState(false);
-   console.log(showAll);
+   const [input, setInput] = useState("");
+   const {updateSearchResults} = useContext(SearchContext)
+   const navigate = useNavigate();
+     
+   const handleSearch = async ()=>{
+    const options = {
+        method: 'GET',
+        url: 'https://real-time-amazon-data.p.rapidapi.com/search',
+        params: {
+          query: input,
+          page: '1',
+          country: 'US',
+          sort_by: 'RELEVANCE',
+          product_condition: 'ALL'
+        },
+        headers: {
+          'x-rapidapi-key': '91635d0939msh5b24a9624c1f545p1c2479jsnd902c5810862',
+          'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
+        }
+      };
+      
+      try {
+          const response = await axios.request(options);
+          updateSearchResults(response.data.data.products);
+          console.log(response.data.data.products)
+          navigate("./allProducts")
+      } catch (error) {
+          console.error(error);
+      }
+   }
+
+   
+   
     return (
         <div className="w-full bg-[#131921] flex items-center h-16 gap-4 ">
              <div className="px-2 h-[80%] flex items-center border border-transparent hover:border-white cursor-pointer duration-100"> <img src={logo} className="w-24  "></img>
@@ -59,8 +95,8 @@ const Header = () =>{
                         </div>
                     )
                 }
-                <input type="text" placeholder="Search Amazon.in" className="h-full text-base text-[#131921] flex flex-grow outline-none border-none px-2"></input>
-                <span className="w-12 h-full flex items-center justify-center bg-[#FEBD69] hover:bg-[#F0A647] duration-300 text-black cursor-pointer rounded-tr-md rounded-br-md text-xl"><AiOutlineSearch /></span>
+                <input value={input} onChange={(e)=>setInput(e.target.value)} type="text" placeholder="Search Amazon.in" className="h-full text-base text-[#131921] flex flex-grow outline-none border-none px-2"></input>
+                <span  onClick={handleSearch} className="w-12 h-full flex items-center justify-center bg-[#FEBD69] hover:bg-[#F0A647] duration-300 text-black cursor-pointer rounded-tr-md rounded-br-md text-xl"><AiOutlineSearch /></span>
             </section>
             <section className=" px-2 h-[80%]  text-white flex flex-col items-start justify-center border border-transparent hover:border-white cursor-pointer duration-100">
                 <p className="text-xs text-slate-400 font-semibold">Hello,sign in</p>

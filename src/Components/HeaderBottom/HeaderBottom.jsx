@@ -33,7 +33,7 @@ const HeaderBottom = () =>{
           </ul>
           {
             sidebar &&(
-                <div className="w-full h-screen text-black fixed top-0 left-0 bg-[#232F3E] bg-opacity-50    ">
+                <div className="w-full h-screen text-black fixed top-0 left-0 bg-[#232F3E] bg-opacity-50  z-50  ">
                  <div className="w-full h-full relative">
                   <div className="w-[350px] h-full bg-white border border-black overflow-x-hidden overflow-y-scroll">
                    <div className="w-full bg-[#232F3E] text-white py-2 px-6 flex items-center gap-3">
