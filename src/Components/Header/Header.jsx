@@ -6,10 +6,14 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FaCartShopping } from "react-icons/fa6";
 import { SearchContext } from "../../Context/Data/SearchContext";
 import {useNavigate} from "react-router-dom"
+import { Link } from 'react-router-dom';
 
 import axios from 'axios';
+import { useSelector } from "react-redux";
 
 const Header = ({}) =>{
+    const products = useSelector((state)=>state.amazonReducer.products)
+    
    const[showAll, setShowAll] = useState(false);
    const [input, setInput] = useState("");
    const {updateSearchResults} = useContext(SearchContext)
@@ -27,7 +31,7 @@ const Header = ({}) =>{
           product_condition: 'ALL'
         },
         headers: {
-          'x-rapidapi-key': '91635d0939msh5b24a9624c1f545p1c2479jsnd902c5810862',
+          'x-rapidapi-key': 'e2684b2f03msh93b760f47e61b9dp12a98ajsne0bf9a91cd09',
           'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
         }
       };
@@ -46,8 +50,8 @@ const Header = ({}) =>{
    
     return (
         <div className="w-full bg-[#131921] flex items-center h-16 gap-4 ">
-             <div className="px-2 h-[80%] flex items-center border border-transparent hover:border-white cursor-pointer duration-100"> <img src={logo} className="w-24  "></img>
-                 </div>
+             <Link to="/" className="px-2 h-[80%] flex items-center border border-transparent hover:border-white cursor-pointer duration-100"> <img src={logo} className="w-24  "></img>
+                 </Link>
             <section className="px-2 h-[80%] flex items-center border border-transparent text-white hover:border-white cursor-pointer duration-100"> 
             <FaLocationDot/>
             <p className="text-sm text-white ">Deliver to <span className="text-sm font-semibold   text-white">India</span></p>
@@ -106,10 +110,14 @@ const Header = ({}) =>{
                 <p className="text-xs">Returns</p>
                 <p className="text-sm -mt-1 font-bold">& Orders</p>
             </section>
-            <section className= "  px-3 py-1 h-[60%]   text-white flex items-start justify-center  border border-transparent hover:border-white cursor-pointer duration-100 relative">
+            <Link to="/cart" className= "  px-3 py-1 h-[60%]   text-white flex items-start justify-center  border border-transparent hover:border-white cursor-pointer duration-100 relative">
             <FaCartShopping />
-            <p className="text-xs font-semibold mt-3 ">Cart <span className="absolute text-xs -top-2 left-2 font-semibold p-1 h-4 bg-[#F0A647] flex items-center justify-center rounded-full">0</span></p>
-            </section>
+            <p className="text-xs font-semibold mt-3 ">Cart <span className="absolute text-xs -top-2 left-2 font-semibold p-1 h-4 bg-[#F0A647] flex items-center justify-center rounded-full">
+                {
+                    products.length > 0 ?products.length:0
+                }
+                </span></p>
+            </Link>
         </div>
     )
 }

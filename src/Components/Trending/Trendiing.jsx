@@ -16,7 +16,7 @@ const Trending = () => {
               discount_range: 'ALL'
             },
             headers: {
-              'x-rapidapi-key': '91635d0939msh5b24a9624c1f545p1c2479jsnd902c5810862',
+              'x-rapidapi-key': 'cb68d03c14msh07750a08ee12301p104ef5jsna08e90616ab8',
               'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
             }
           };
