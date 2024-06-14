@@ -31,7 +31,7 @@ const Header = ({}) =>{
           product_condition: 'ALL'
         },
         headers: {
-          'x-rapidapi-key': 'e2684b2f03msh93b760f47e61b9dp12a98ajsne0bf9a91cd09',
+          'x-rapidapi-key': '0564b7a072msh0b34f2a496006e4p175005jsn026dc2112d4c',
           'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
         }
       };

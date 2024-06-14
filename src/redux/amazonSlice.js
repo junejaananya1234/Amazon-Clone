@@ -21,8 +21,14 @@ export const amazonSlice = createSlice({
       }
       
     },
+   deleteItem: (state,action)=>{
+         state.products = state.products.filter((item)=>item.id!== action.payload)
+   },
+   resetCart: (state)=>{
+    state.products=[]
+   }
   },
 });
 
-export const { addToCart } = amazonSlice.actions;
+export const { addToCart,deleteItem,resetCart } = amazonSlice.actions;
 export default amazonSlice.reducer;

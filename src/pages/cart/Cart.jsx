@@ -1,9 +1,21 @@
 import Layout from "../../Components/Layout/Layout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaRegCircleCheck } from "react-icons/fa6";
+import { useState, useEffect } from "react";
+import { deleteItem } from "../../redux/amazonSlice";
 
 const Cart = () => {
+  const dispatch = useDispatch()
   const products = useSelector((state) => state.amazonReducer.products);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    let Total = 0;
+    products.forEach((item) => {
+      Total += item.price * item.quantity;
+    });
+    setTotalPrice(Total.toFixed(2));
+  }, [products]);
 
   return (
     <Layout>
@@ -30,23 +42,30 @@ const Cart = () => {
                       <p>{item.quantity}</p>
                       <p className="cursor-pointer bg-gray-200 px-1 rounded-md hover:bg-gray-400 duration-300">+</p>
                     </div>
-                    <button className="bg-red-500 w-36 py-1 rounded-lg text-white mt-2 hover:bg-red-700 active:bg-red-900 duration-300">Delete Item</button>
+                    <button onClick={()=>dispatch(deleteItem(item.id))} className="bg-red-500 w-36 py-1 rounded-lg text-white mt-2 hover:bg-red-700 active:bg-red-900 duration-300">Delete Item</button>
                   </div>
                   <div className="text-lg font-semibold">
                     ${item.price * item.quantity}
                   </div>
                 </div>
               ))}
+              <div>
+                <button className="bg-red-500 w-36 py-1 rounded-lg text-white mt-2 hover:bg-red-700 active:bg-red-900 duration-300">Clear Cart</button>
+              </div>
             </div>
           </div>
           
-          <div className="w-full h-52 bg-white col-span-1 p-4 flex items-center p-4">
+          <div className="w-full h-52 bg-white col-span-1 flex items-center p-4 flex-col justify-center">
             <p className="flex gap-2 items-start text-sm">
               <span>
                 <FaRegCircleCheck className="text-green-500" />
               </span>
               Your order qualifies for FREE Shipping. Choose this option at checkout. See details...
             </p>
+            <div>
+              <p className="font-semibold px-10 py-1 flex items-center justify-between">Total:<span className="text-lg font-bold">${totalPrice}</span></p>
+            </div>
+            <button className="w-full font-medium text-base bg-gradient-to-tr from-yellow-400 to-yellow-200 border hover:from-yellow-300 hover:to-yellow border-yellow-500 py-1 rounded-md">Proceed To Pay</button>
           </div>
         </div>
       </div>

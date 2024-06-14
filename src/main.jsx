@@ -7,7 +7,7 @@ import { store } from "./redux/Store.js"
 import { Provider } from "react-redux"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  
     <Provider store={store}>
     <SearchProvider>
     <App />
@@ -15,5 +15,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Provider>
    
    
-  </React.StrictMode>
+  
 )
