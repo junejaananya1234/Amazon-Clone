@@ -102,10 +102,10 @@ const Header = ({}) =>{
                 <input value={input} onChange={(e)=>setInput(e.target.value)} type="text" placeholder="Search Amazon.in" className="h-full text-base text-[#131921] flex flex-grow outline-none border-none px-2"></input>
                 <span  onClick={handleSearch} className="w-12 h-full flex items-center justify-center bg-[#FEBD69] hover:bg-[#F0A647] duration-300 text-black cursor-pointer rounded-tr-md rounded-br-md text-xl"><AiOutlineSearch /></span>
             </section>
-            <section className=" px-2 h-[80%]  text-white flex flex-col items-start justify-center border border-transparent hover:border-white cursor-pointer duration-100">
+            <Link to="./SignUp"  className=" px-2 h-[80%]  text-white flex flex-col items-start justify-center border border-transparent hover:border-white cursor-pointer duration-100">
                 <p className="text-xs text-slate-400 font-semibold">Hello,sign in</p>
                 <p className="text-sm flex font-bold -mt-1">Accounts & List{" "}<span><IoMdArrowDropdown className="text-xl" /></span></p>
-            </section>
+            </Link>
             <section className=" px-2 h-[80%] flex flex-col item-start justify-center border border-transparent text-white hover:border-white cursor-pointer duration-100 ">
                 <p className="text-xs">Returns</p>
                 <p className="text-sm -mt-1 font-bold">& Orders</p>

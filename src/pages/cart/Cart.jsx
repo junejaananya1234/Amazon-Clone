@@ -2,12 +2,13 @@ import Layout from "../../Components/Layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { useState, useEffect } from "react";
-import { deleteItem } from "../../redux/amazonSlice";
+import { deleteItem,incrementQuantity,decrementQuantity } from "../../redux/amazonSlice";
 
 const Cart = () => {
   const dispatch = useDispatch()
   const products = useSelector((state) => state.amazonReducer.products);
   const [totalPrice, setTotalPrice] = useState(0);
+  
 
   useEffect(() => {
     let Total = 0;
@@ -15,6 +16,7 @@ const Cart = () => {
       Total += item.price * item.quantity;
     });
     setTotalPrice(Total.toFixed(2));
+    
   }, [products]);
 
   return (
@@ -38,9 +40,9 @@ const Cart = () => {
                     <p>Unit Price: <span className="font-semibold">${item.price}</span></p>
                     <div className="bg-[#F0F2F2] flex justify-center gap-1 w-24 py-1 text-center drop-shadow-lg rounded-md">
                       <p>Qty:</p>
-                      <p className="cursor-pointer bg-gray-200 px-1 rounded-md hover:bg-gray-400 duration-300">-</p>
+                      <p onClick={()=>dispatch(decrementQuantity(item.id))} className="cursor-pointer bg-gray-200 px-1 rounded-md hover:bg-gray-400 duration-300">-</p>
                       <p>{item.quantity}</p>
-                      <p className="cursor-pointer bg-gray-200 px-1 rounded-md hover:bg-gray-400 duration-300">+</p>
+                      <p  onClick={()=>dispatch(incrementQuantity(item.id))}className="cursor-pointer bg-gray-200 px-1 rounded-md hover:bg-gray-400 duration-300">+</p>
                     </div>
                     <button onClick={()=>dispatch(deleteItem(item.id))} className="bg-red-500 w-36 py-1 rounded-lg text-white mt-2 hover:bg-red-700 active:bg-red-900 duration-300">Delete Item</button>
                   </div>

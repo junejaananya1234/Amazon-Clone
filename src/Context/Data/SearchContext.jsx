@@ -11,8 +11,10 @@ export const SearchProvider = ({ children }) => {
     setSearchQuery(query);
   };
 
+  const[loading,setLoading] = useState(false);
+
   return (
-    <SearchContext.Provider value={{ searchResults, searchQuery, updateSearchResults }}>
+    <SearchContext.Provider value={{ searchResults, searchQuery, updateSearchResults, loading,setLoading }}>
       {children}
     </SearchContext.Provider>
   );
