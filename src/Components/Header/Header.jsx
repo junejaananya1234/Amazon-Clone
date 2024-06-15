@@ -7,6 +7,8 @@ import { FaCartShopping } from "react-icons/fa6";
 import { SearchContext } from "../../Context/Data/SearchContext";
 import {useNavigate} from "react-router-dom"
 import { Link } from 'react-router-dom';
+import { DisplayContext } from "../../Context/Data/DisplayContext";
+
 
 import axios from 'axios';
 import { useSelector } from "react-redux";
@@ -18,6 +20,7 @@ const Header = ({}) =>{
    const [input, setInput] = useState("");
    const {updateSearchResults} = useContext(SearchContext)
    const navigate = useNavigate();
+   const { name } = useContext(DisplayContext)
      
    const handleSearch = async ()=>{
     const options = {
@@ -31,7 +34,7 @@ const Header = ({}) =>{
           product_condition: 'ALL'
         },
         headers: {
-          'x-rapidapi-key': '0564b7a072msh0b34f2a496006e4p175005jsn026dc2112d4c',
+          'x-rapidapi-key': 'd3756c3714msh7fa88e04fe41bd7p1a1608jsna950c1b89eb1',
           'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
         }
       };
@@ -103,7 +106,7 @@ const Header = ({}) =>{
                 <span  onClick={handleSearch} className="w-12 h-full flex items-center justify-center bg-[#FEBD69] hover:bg-[#F0A647] duration-300 text-black cursor-pointer rounded-tr-md rounded-br-md text-xl"><AiOutlineSearch /></span>
             </section>
             <Link to="./SignUp"  className=" px-2 h-[80%]  text-white flex flex-col items-start justify-center border border-transparent hover:border-white cursor-pointer duration-100">
-                <p className="text-xs text-slate-400 font-semibold">Hello,sign in</p>
+                <p className="text-xs text-slate-400 font-semibold">Hello,{name}</p>
                 <p className="text-sm flex font-bold -mt-1">Accounts & List{" "}<span><IoMdArrowDropdown className="text-xl" /></span></p>
             </Link>
             <section className=" px-2 h-[80%] flex flex-col item-start justify-center border border-transparent text-white hover:border-white cursor-pointer duration-100 ">

@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import { deleteItem,incrementQuantity,decrementQuantity } from "../../redux/amazonSlice";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const dispatch = useDispatch()
   const products = useSelector((state) => state.amazonReducer.products);
   const [totalPrice, setTotalPrice] = useState(0);
   
-
   useEffect(() => {
     let Total = 0;
     products.forEach((item) => {
@@ -18,6 +18,40 @@ const Cart = () => {
     setTotalPrice(Total.toFixed(2));
     
   }, [products]);
+
+  // const [name, setName] = useState("")
+  // const [address, setAddress] = useState("");
+  // const [pincode, setPincode] = useState("")
+  // const [phoneNumber, setPhoneNumber] = useState("")
+
+  // const buyNow = async ()=>{
+  //   if (name === "" || address == "" || pincode == "" || phoneNumber == ""){
+  //     return toast.error("All fields are required",{
+  //       position: "top-center",
+  //       autoClose: 1000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "colored",
+  //     })
+  //   }
+  //   const addressInfo = {
+  //     name,
+  //     address,
+  //     pincode,
+  //     phoneNumber,
+  //     date: new Date().toLocaleString(
+  //       "en-US",
+  //       {
+  //         month: "short",
+  //         day: "2-digit",
+  //         year: "numeric",
+  //       }
+  //     )
+  //   }
+  // }
 
   return (
     <Layout>
